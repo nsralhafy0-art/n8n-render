@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: n8n
+    runtime: image
+    image:
+      url: docker.io/n8nio/n8n:latest
+    plan: free
+    envVars:
+      - key: N8N_HOST
+        value: 0.0.0.0
+      - key: N8N_PORT
+        value: 5678
+      - key: N8N_PROTOCOL
+        value: https
+      - key: NODE_ENV
+        value: production
+      - key: WEBHOOK_URL
+        value: https://n8n.onrender.com
+      - key: GENERIC_TIMEZONE
+        value: Asia/Riyadh
+      - key: N8N_ENCRYPTION_KEY
+        generateValue: true
+    disk:
+      name: n8n-data
+      mountPath: /home/node/.n8n
+      sizeGB: 1
